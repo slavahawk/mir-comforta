@@ -1,0 +1,64 @@
+@mixin disflex($dis, $jc, $ai) {
+  display: $dis;
+  justify-content: $jc;
+  align-items: $ai;
+}
+
+// Адаптивные шрифты до 976px
+$maxWidth: 1920;
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $maxWidth: $maxWidth - 976;
+  font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 976px) / #{$maxWidth}));
+}
+
+// Адаптивные шрифты до 320px
+$maxWidthAll: 1920;
+
+@mixin adaptiv-fontAll($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $maxWidthAll: $maxWidthAll - 320;
+  font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthAll}));
+}
+
+// Адаптивные шрифты до 320px
+$maxWidthMin: 976;
+
+@mixin adaptiv-fontMin($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $maxWidthMin: $maxWidthMin - 320;
+  font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthMin}));
+}
+
+
+@function checkValue ($pos) {
+
+  @if $pos == auto {
+    $pos: auto;
+    @return $pos;
+  } @else if $pos == 0 {
+    $pos: 0;
+    @return $pos;
+  } @else if length($pos) == 2 {
+    $pos: calc(#{nth($pos, 2) + px} + (#{nth($pos, 1)} - #{nth($pos, 2)}) * (100vw - 320px) / (1920 - 320));
+    @return $pos;
+  } @else if length($pos == 1) {
+    $pos: #{$pos + px};
+    @return $pos;
+  } @else {
+    @error "Mixin usage error, use '0', 'auto' or 'min max' value"
+  }
+}
+
+@mixin adaptive-value($property , $top, $right, $bottom, $left) {
+  #{$property}: checkValue($top) checkValue($right) checkValue($bottom) checkValue($left);
+}
+
+
+
+
+@mixin adaptive-elem($property, $max, $min) {
+  #{$property}: calc(#{$min + px} + (#{$max} - #{$min}) * (100vw - 320px) / (1920 - 320));
+}
+

@@ -1,0 +1,9 @@
+@import "null";
+@import "mixins";
+
+body{
+    font-family: Inter,sans-serif;
+    a, p{
+        color: #323232;
+    }
+}

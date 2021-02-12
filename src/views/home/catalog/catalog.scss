@@ -1,0 +1,31 @@
+.catalog {
+
+    &__content {
+        min-height: 100vh;
+        padding: 5vh 16px 0;
+        max-width: 1392px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+
+        &__item{
+            background: #FFFFFF;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 20px 60px;
+
+
+            .item__image{
+                img{
+                    display: block;
+                    width: 100%;
+                }
+            }
+
+            .item__info{
+                display: block;
+                padding: 8px 12px 16px;
+            }
+        }
+    }
+}
